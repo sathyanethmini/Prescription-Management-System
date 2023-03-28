@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'https://mocki.io/v1/76afc3f7-7051-4b31-a55b-429cb9795c66';
+const API_URL = 'https://localhost:44382/api/Medicine/GetAllMedicine';
 
 export const getProducts = async () => {
     return await axios({
-        method: 'get',
+        method: 'post',
         url: API_URL,
         headers: {
             'Content-Type': 'application/json'

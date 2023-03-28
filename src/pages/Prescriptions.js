@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PrescriptionsListComponent from "../components/prescriptionComponent/PrescriptionsListComponent";
 import { UserContext } from "../contexts/AuthContext";
 import Layout from '../layouts/MainLayout'
 
@@ -8,7 +9,7 @@ export default function Prescriptions() {
 
   return (
     <Layout>
-          <div>Prescriptions {theme}</div>
+         <PrescriptionsListComponent/>
     </Layout>
   )
 }

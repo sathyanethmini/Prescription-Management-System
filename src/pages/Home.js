@@ -7,6 +7,8 @@ export default function Home() {
 
   // Reading values from the global state
   const theme = globalState.theme;
+
+
   console.log(globalState.currentUserType);
 
   return (
@@ -32,7 +34,6 @@ export default function Home() {
               src="https://www.isglobal.org/documents/10179/8304240/Planetary+health+logo/cf137574-c80f-4e8c-abcb-c2f13718ed36?t=1662543417000"
               width=""
               height="100"
-              srcset=""
               sizes=""
               alt=""
             />

@@ -1,16 +1,10 @@
 import React from "react";
 
-export default function PatientsListComponent() {
+export default function PrescriptionsListComponent() {
   return (
     <div>
-      <h1 className="pb-3">Patients</h1>
+      <h1 className="pb-3">Prescriptions</h1>
       <div className="d-flex ">
-        <div>
-          <button type="button" className="btn btn-primary me-3">
-            Add New Medicine
-          </button>
-        </div>
-
         <div className="input-group ml-5 ">
           <div
             id="search-autocomplete"
@@ -32,11 +26,11 @@ export default function PatientsListComponent() {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Code</th>
-              <th scope="col">Name</th>
-              <th scope="col">Age</th>
-              <th scope="col">Address</th>
-              <th scope="col">Sex</th>
-              <th scope="col">Last day met</th>
+              <th scope="col">Patient Name</th>
+              <th scope="col">Created Date</th>
+              <th scope="col">Issued Doctor Id</th>
+              <th scope="col">Issued Doctor Name</th>
+              <th scope="col">Is Medicine Issued</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -51,10 +45,7 @@ export default function PatientsListComponent() {
               <td>data.quentity</td>
               <td className="d-flex">
                 <button type="button" className="btn btn-primary tableButton">
-                  View history
-                </button>
-                <button type="button" className="btn btn-warning tableButton">
-                  Edit profile
+                  View
                 </button>
                 <button type="button" className="btn btn-danger">
                   Delete

@@ -7,7 +7,7 @@ import {
 import { UserContext } from "../contexts/AuthContext";
 
 import RouteGuard from "../middleware/RouteGuard";
-import Patients from "../pages/Patients";
+import Patients from "../pages/patientPages/Patients";
 import Prescriptions from "../pages/Prescriptions";
 import Stock from "../pages/stockPages/Stock";
 import Home from "../pages/Home";
@@ -28,8 +28,7 @@ export default function AppRoutes() {
       <Routes>
       <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<RouteGuard Component={Home} autherized={userTypes.includes("Admin")}/>} />
-        <Route path="/patients" element={<RouteGuard Component={Patients} autherized={userTypes.includes("Admin")}/>} />
+        <Route path="/" element={<RouteGuard Component={Home} autherized={userTypes.includes("Doctor")}/>} />
         <Route path="/patients" element={<RouteGuard Component={Patients} autherized={userTypes.includes("Admin")}/>} />
         <Route path="/prescriptions" element={<RouteGuard Component={Prescriptions} autherized={userTypes.includes("Admin")}/>} />
         <Route path="/stock" element={<RouteGuard Component={Stock}/>} autherized={userTypes.includes("Admin")}/>

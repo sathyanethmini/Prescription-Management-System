@@ -6,7 +6,7 @@ export default function AddItemToStockComponent() {
       <h1 className="">Add Medicine To Stock</h1>
       <form className="p-4 rounded-2 shadow-2-strong">
         <div className="form-group">
-          <label for="name">Name</label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             className="form-control mb-3"
@@ -15,7 +15,7 @@ export default function AddItemToStockComponent() {
           />
         </div>
         <div className="form-group">
-          <label for="description">Description</label>
+          <label htmlFor="description">Short Code</label>
           <input
             type="text"
             className="form-control mb-3"
@@ -24,7 +24,7 @@ export default function AddItemToStockComponent() {
           />
         </div>
         <div className="form-group">
-          <label for="price">Price</label>
+          <label htmlFor="price">Purpose</label>
           <input
             type="text"
             className="form-control mb-3"
@@ -33,7 +33,16 @@ export default function AddItemToStockComponent() {
           />
         </div>
         <div className="form-group">
-          <label for="quentity">Quentity</label>
+          <label htmlFor="quentity">Description</label>
+          <textarea
+            type="text"
+            className="form-control mb-3"
+            id="quantity"
+            placeholder="Enter medicine quentity"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="quentity">quentity</label>
           <input
             type="text"
             className="form-control mb-3"
@@ -43,7 +52,7 @@ export default function AddItemToStockComponent() {
         </div>
         <div className="form-check">
           <input type="checkbox" className="form-check-input mb-3" id="check" />
-          <label className="form-check-label" for="check">
+          <label className="form-check-label" htmlFor="check">
             Allowed to issue without prescription
           </label>
         </div>

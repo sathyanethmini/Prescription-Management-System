@@ -27,7 +27,9 @@ export default function StockListComponent() {
   useEffect(() => {
     getProducts().then((res) => {
       setProductData(res.data);
+      console.log(res.data)
     });
+    
   }, []);
 
   return (
@@ -50,12 +52,12 @@ export default function StockListComponent() {
             className="form-outline shadow-2-strong"
           >
             <input type="search" id="form1" className="form-control" />
-            <label className="form-label" for="form1">
+            <label className="form-label" htmlFor="form1">
               Search by Code
             </label>
           </div>
           <button type="button" className="btn btn-primary">
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
           </button>
         </div>
       </div>
@@ -66,10 +68,9 @@ export default function StockListComponent() {
               <th scope="col">#</th>
               <th scope="col">Code</th>
               <th scope="col">Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Price</th>
-              <th scope="col">Issue without prescription</th>
+              <th scope="col">Purpose</th>
               <th scope="col">Quentity</th>
+              <th scope="col">Price</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -78,23 +79,16 @@ export default function StockListComponent() {
               return (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{data.code}</td>
-                  <td>{data.name}</td>
-                  <td>{data.description}</td>
-                  <td>{data.price}</td>
-                  <td>
-                    {data.autherize ? (
-                      <button className="btn btn-success disabled">Yes</button>
-                    ) : (
-                      <button className="btn btn-danger disabled">No</button>
-                    )}
-                  </td>
-                  <td>{data.quentity}</td>
+                  <td>{data.medicineShortCode}</td>
+                  <td>{data.medicineName}</td>
+                  <td>{data.purpose}</td>
+                  <td>{data.qty}</td>
+                  <td>{data.averagePricePerUnit}</td>
                   <td className="d-flex">
                     <button
                       type="button"
                       className="btn btn-primary tableButton"
-                      onClick={() => setModalShow(true)}
+                      onClick={() => handleViewItem(data.medicineName, data.medicineShortCode, data.description)}
                     >
                       View
                     </button>

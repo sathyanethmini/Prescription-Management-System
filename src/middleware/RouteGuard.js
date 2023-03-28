@@ -10,7 +10,7 @@ const isAuthenticated = () => {
 function RouteGuard(props) {
   
   const  Component  = props.Component;
-  const autherized = props.autherized;
+  const autherized = true;
 
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function RouteGuard(props) {
       navigate("/login");
     }
   }, []);
-
+  
   return (
     <div>
       <Component />
