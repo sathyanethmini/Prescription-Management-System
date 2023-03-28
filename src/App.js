@@ -2,9 +2,8 @@ import React from "react";
 import "./App.css";
 import { MyProvider } from "./contexts/AuthContext";
 
-import Routers from "./routes/Routes";
-
 import { setAuthToken } from "./helpers/setAuthToken";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   //check jwt token
@@ -16,7 +15,7 @@ function App() {
   return (
     <MyProvider>
         <div className="App">
-          <Routers />
+          <AppRoutes/>
         </div>
     </MyProvider>
   );

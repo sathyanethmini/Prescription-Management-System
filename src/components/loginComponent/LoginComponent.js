@@ -1,20 +1,20 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import RightImage from "../../assets/Images/login_page_left_image.png";
+import { useAuth } from "../../services/AuthService";
 
-import {submitLoginData} from  "../../services/AuthService"
 export default function LoginComponent() {
+  const { submitLoginData } = useAuth();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-        var data = {
-            email: username,
-            password: password
-        };
-    submitLoginData(data);
-  }
+    var data = {
+      email: username,
+      password: password,
+    };
+    await submitLoginData(data);
+  };
 
   return (
     <div className="h-100 p-5">
@@ -54,8 +54,10 @@ export default function LoginComponent() {
                       Register
                     </a>
                   </div>
-                  <label htmlFor="validationCustomUsername" className="form-label">
-                    Username
+                  <label
+                    htmlFor="validationCustomUsername"
+                    className="form-label"
+                  >
                   </label>
                 </div>
               </form>

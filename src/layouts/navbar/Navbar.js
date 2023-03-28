@@ -2,16 +2,18 @@ import React from "react";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Dropdown from "react-bootstrap/Dropdown";
+import { useAuth } from "../../services/AuthService";
 import logo from "../../assets/Images/logo.png";
-import { logout } from "../../services/AuthService";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const { logout } = useAuth();
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary static-top navbarCustom">
         <div className="container">
           <a className="navbar-brand d-flex" role="button" href="/">
-            <img src={logo} alt="..." height="56" />
+            <img src={logo} alt="..." height="65" />
           </a>
           <button
             className="navbar-toggler"
@@ -27,29 +29,20 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  aria-current="page"
-                  role="button"
-                  href="/patients"
-                >
+                <Link className="nav-link" to="/patients">
                   patients
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  aria-current="page"
-                  role="button"
-                  href="/prescriptions"
-                >
+                <Link className="nav-link" to="/prescriptions">
                   Prescriptions
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" role="button" href="/stock">
+                <Link className="nav-link" to="/stock">
+                  {" "}
                   Stock
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

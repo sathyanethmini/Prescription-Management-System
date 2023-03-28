@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import RightImage from "../../assets/Images/login_page_left_image.png";
 import SuccessAlert from "../../layouts/alerts/SuccessAlert";
-import { submitRegisterData } from "../../services/AuthService";
+import { useAuth } from "../../services/AuthService";
 
 export default function RegisterComponent() {
+
+  const { submitRegisterData } = useAuth();
   const [type, setType] = useState("");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
