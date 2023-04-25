@@ -1,13 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function PatientsListComponent() {
+
+  const Navigate = useNavigate();
+
+  const handleClickViewHistory = () => { 
+    Navigate("/patients/history");
+  };
+  const handleClickCreatePatient = () => { 
+    Navigate("/patients/create");
+  };
+
   return (
     <div>
       <h1 className="pb-3">Patients</h1>
       <div className="d-flex ">
         <div>
-          <button type="button" className="btn btn-primary me-3">
-            Add New Medicine
+          <button type="button" className="btn btn-primary me-3" onClick={handleClickCreatePatient}>
+            Add New Patient
           </button>
         </div>
 
@@ -17,7 +28,7 @@ export default function PatientsListComponent() {
             className="form-outline shadow-2-strong"
           >
             <input type="search" id="form1" className="form-control" />
-            <label className="form-label" for="form1">
+            <label className="form-label" htmlFor="form1">
               Search by Code
             </label>
           </div>
@@ -50,7 +61,10 @@ export default function PatientsListComponent() {
               <td>Male</td>
               <td>data.quentity</td>
               <td className="d-flex">
-                <button type="button" className="btn btn-primary tableButton">
+                <button type="button" className="btn btn-success tableButton" onClick={handleClickViewHistory}>
+                  Add today visit
+                </button>
+                <button type="button" className="btn btn-primary tableButton" onClick={handleClickViewHistory}>
                   View history
                 </button>
                 <button type="button" className="btn btn-warning tableButton">

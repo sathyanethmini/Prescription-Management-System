@@ -11,7 +11,7 @@ export default function PrescriptionsListComponent() {
             className="form-outline shadow-2-strong"
           >
             <input type="search" id="form1" className="form-control" />
-            <label className="form-label" for="form1">
+            <label className="form-label" htmlFor="form1">
               Search by Code
             </label>
           </div>

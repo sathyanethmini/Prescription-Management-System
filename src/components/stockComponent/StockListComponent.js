@@ -13,7 +13,7 @@ export default function StockListComponent() {
 
   const Navigate = useNavigate();
 
-  const handAddItem = () => {
+  const handAddItem = () => { 
     Navigate("/stock/add");
   };
 
@@ -61,8 +61,8 @@ export default function StockListComponent() {
           </button>
         </div>
       </div>
-      <div className="scrollbleTable">
-        <table className="table table-hover">
+      <div className="scrollbleTable ">
+        <table className="table table-hover ">
           <thead>
             <tr>
               <th scope="col">#</th>

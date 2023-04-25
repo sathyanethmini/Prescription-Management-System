@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { MyProvider } from "./contexts/AuthContext";
-
 import { setAuthToken } from "./helpers/setAuthToken";
 import AppRoutes from "./routes/AppRoutes";
 

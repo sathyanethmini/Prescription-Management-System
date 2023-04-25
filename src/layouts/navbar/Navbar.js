@@ -4,13 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useAuth } from "../../services/AuthService";
 import logo from "../../assets/Images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const { logout } = useAuth();
+  const Navigate = useNavigate();
+
+  const goToProfile = () => {
+    Navigate("/user/profile");
+  }
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary static-top navbarCustom">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top navbarCustom">
         <div className="container">
           <a className="navbar-brand d-flex" role="button" href="/">
             <img src={logo} alt="..." height="65" />
@@ -52,8 +57,7 @@ export default function Navbar() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Setting</Dropdown.Item>
+                <Dropdown.Item onClick={goToProfile}>Profile</Dropdown.Item>
                 <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

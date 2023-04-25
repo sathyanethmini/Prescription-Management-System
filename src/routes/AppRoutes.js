@@ -16,6 +16,9 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddItemToStock from "../pages/stockPages/AddItemToStock";
+import PatientHistory from "../pages/patientPages/PatientHistory";
+import Profile from "../pages/userPages/Profile";
+import CreatePatient from "../pages/patientPages/CreatePatient";
 
 export default function AppRoutes() {
 
@@ -33,6 +36,13 @@ export default function AppRoutes() {
         <Route path="/prescriptions" element={<RouteGuard Component={Prescriptions} autherized={userTypes.includes("Admin")}/>} />
         <Route path="/stock" element={<RouteGuard Component={Stock}/>} autherized={userTypes.includes("Admin")}/>
         <Route path="/stock/add" element={<RouteGuard Component={AddItemToStock} autherized={userTypes.includes("Admin")}/>} />
+
+        {/* User Routes */}
+        <Route path="/user/profile" element={<RouteGuard Component={Profile} autherized={userTypes.includes("Admin")}/>} />
+
+        {/* Patient Routes */}
+        <Route path="/patients/history" element={<RouteGuard Component={PatientHistory} autherized={userTypes.includes("Admin")}/>} />
+        <Route path="/patients/create" element={<RouteGuard Component={CreatePatient} autherized={userTypes.includes("Admin")}/>} />
       </Routes>
     </Router>
   );
