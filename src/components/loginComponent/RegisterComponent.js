@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import RightImage from "../../assets/Images/login_page_left_image.png";
 import SuccessAlert from "../../layouts/alerts/SuccessAlert";
 import { useAuth } from "../../services/AuthService";
+import HandleFirebasesubmit from "../../helpers/HandleFirebasesubmit";
 
 export default function RegisterComponent() {
-
   const { submitRegisterData } = useAuth();
   const [type, setType] = useState("");
   const [email, setEmail] = useState("");
@@ -15,11 +15,11 @@ export default function RegisterComponent() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [AdminCreateSecret, setAdminCreateSecret] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
+  const [confirmationfile, setConfirmationFile] = useState("");
 
   const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
 
   const handleSubmit = (event) => {
-    debugger;
     event.preventDefault();
 
     if (type !== "ADM" && type !== "FAMC" && type !== "DOC") {
@@ -39,7 +39,8 @@ export default function RegisterComponent() {
           firstName: firstName,
           lastName: lastName,
           dob: dob,
-          AdminCreateSecret: AdminCreateSecret
+          confirmationFileUrl: confirmationfile,
+          AdminCreateSecret: AdminCreateSecret,
         };
         break;
       case "FAMC":
@@ -48,7 +49,8 @@ export default function RegisterComponent() {
           password: password,
           firstName: firstName,
           lastName: lastName,
-          dob: dob
+          dob: dob,
+          confirmationFileUrl: confirmationfile,
         };
         break;
       case "DOC":
@@ -57,7 +59,8 @@ export default function RegisterComponent() {
           password: password,
           firstName: firstName,
           lastName: lastName,
-          dob: dob
+          dob: dob,
+          confirmationFileUrl: confirmationfile,
         };
         break;
     }
@@ -65,9 +68,13 @@ export default function RegisterComponent() {
     submitRegisterData(data, type);
   };
 
+  const handleUpload = (url) => {
+    setConfirmationFile(url);
+  };
+
   return (
-    <div className="h-100 p-5">
-      <SuccessAlert isShow={isRegistrationSuccess}/>
+    <div className="p-5">
+      <SuccessAlert isShow={isRegistrationSuccess} />
       <div className="row">
         <div className="col-md-6 ">
           <img src={RightImage} alt="right_image" className="img-fluid" />
@@ -156,6 +163,14 @@ export default function RegisterComponent() {
                           setConfirmPassword(event.target.value)
                         }
                       />
+                      {type === "ADM" ? null : (
+                        <>
+                          <label htmlFor="adminCreateSecret">
+                            Confirmation File
+                          </label>
+                          <HandleFirebasesubmit onUpload={handleUpload} />
+                        </>
+                      )}
                       {type === "ADM" ? (
                         <>
                           <label htmlFor="adminCreateSecret">

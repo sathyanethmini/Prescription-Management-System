@@ -13,12 +13,13 @@ export default function Footer() {
     };
   return (
     <footer className=" py-3 fixed-bottom">
-      <div className="container">
+      {/* <div className="container">
         <div className="d-flex justify-content-between align-items-center">
           <button className="btn btn-light" onClick={handleBack}>Back</button>
           <button className="btn btn-light" onClick={handleForward}>Forward</button>
         </div>
-      </div>
+      </div> */}
+      <p className="text-center opacity-50">© Faculty Of IT - University of Moratuwa</p>
     </footer>
   );
 }

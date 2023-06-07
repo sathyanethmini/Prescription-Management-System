@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HandleFirebasesubmit from "../../helpers/HandleFirebasesubmit";
-import { addPatient } from "../../services/PatientService";
+import { getPatientById, updatePatinet } from "../../services/PatientService";
+import { useParams } from "react-router-dom";
 
-export default function AddNewPatientComponent() {
+export default function UpdatePatientComponent() {
+  const {id} = useParams();
   const [profilePic, setProfilePic] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -21,6 +23,7 @@ export default function AddNewPatientComponent() {
     console.log(profilePic);
 
     let data = {
+      patientId:id,
       firstName: firstName,
       lastName: lastName,
       gender: gender,
@@ -33,12 +36,29 @@ export default function AddNewPatientComponent() {
       city: city,
       profilePicUrl: profilePic,
     };
-    addPatient(data);
+    updatePatinet(data);
   };
 
   const handleUpload = (url) => {
     setProfilePic(url);
   };
+
+  useEffect(() => {
+    getPatientById(id).then((res) => {
+            // Set the initial state with the provided product data
+    setProfilePic(res.data.profilePicUrl);
+    setFirstName(res.data.firstName)
+    setLastName(res.data.lastName)
+    setGender(res.data.gender)
+    setDob(res.data.dob)
+    setNic(res.data.nic)
+    setEmail(res.data.nic)
+    setPhone(res.data.telephoneNo)
+    setAddress001(res.data.addressLine01)
+    setAddress002(res.data.addressLine02)
+    setCity(res.data.city)
+    });
+  },[]);
 
   return (
     <div>

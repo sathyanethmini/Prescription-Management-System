@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "./../../contexts/AuthContext";
 import { getProducts } from "../../services/StockService";
+import { deleteProduct } from "../../services/StockService";
 import { useNavigate } from "react-router-dom";
 import StockItemInformationModal from "../../components/shared/modals/StockItemInformationModal";
 
 export default function StockListComponent() {
   const [modalShow, setModalShow] = React.useState(false);
   const [productData, setProductData] = useState([]);
+  const [FilterdproductData, setFilteredProductData] = useState([]);
   const [modalTitle, setModalTitle] = useState("");
   const [modalDescription, setModalDescription] = useState("");
   const [medicineCode, setMedicineCode] = useState("");
+  const [searchcode, setSearchCode] = useState("");
 
   const Navigate = useNavigate();
 
@@ -24,9 +27,27 @@ export default function StockListComponent() {
     setModalShow(true);
   };
 
+  const handleDeleteItem = (id) => {
+    deleteProduct(id)
+  }
+
+  const handleUpdateItem = (id) => {
+    Navigate(`/stock/update/${id}`)
+  }
+
+  const handleSearch = () => {
+   if(searchcode != ""){
+    setFilteredProductData( productData.filter(product => product.medicineShortCode == searchcode))
+   }
+   else{
+    setFilteredProductData(productData)
+   }
+  }
+
   useEffect(() => {
     getProducts().then((res) => {
       setProductData(res.data);
+      setFilteredProductData(res.data);
       console.log(res.data)
     });
     
@@ -51,12 +72,15 @@ export default function StockListComponent() {
             id="search-autocomplete"
             className="form-outline shadow-2-strong"
           >
-            <input type="search" id="form1" className="form-control" />
+            <input type="search" id="form1" className="form-control"
+            value={searchcode}
+            onChange={(e) => setSearchCode(e.target.value)}
+            />
             <label className="form-label" htmlFor="form1">
               Search by Code
             </label>
           </div>
-          <button type="button" className="btn btn-primary">
+          <button type="button" className="btn btn-primary" onClick={() => handleSearch()}>
             <i className="fas fa-search"></i>
           </button>
         </div>
@@ -75,7 +99,7 @@ export default function StockListComponent() {
             </tr>
           </thead>
           <tbody>
-            {productData.map(function (data, index) {
+            {FilterdproductData.map(function (data, index) {
               return (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
@@ -95,10 +119,11 @@ export default function StockListComponent() {
                     <button
                       type="button"
                       className="btn btn-warning tableButton"
+                      onClick={() => handleUpdateItem(data.medicineId)}
                     >
                       Edit
                     </button>
-                    <button type="button" className="btn btn-danger">
+                    <button type="button" className="btn btn-danger" onClick={() => handleDeleteItem(data.medicineId)}>
                       Delete
                     </button>
                   </td>

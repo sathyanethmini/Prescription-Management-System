@@ -1,32 +1,48 @@
-import React, { useState } from "react"; 
-import { addProduct } from "../../services/StockService";
+import React, { useState, useEffect } from "react"; 
+import { updateProduct ,getProductById} from "../../services/StockService";
+import { useParams } from "react-router-dom";
 
-export default function AddItemToStockComponent() {
+export default function UpdateStockItemComponent() {
 
-  const[medicineName , setMedicinename] = useState("");
-  const[medicineShortCode , setMedicineShortCode] = useState("");
-  const[medicinePurpose , setMedicinePurpose] = useState("");
-  const[medicineDescription , setMedicineDescription] = useState("");
-  const[medicineQuentity , setMedicineQuentity] = useState(0);
-  const[medicinePrice , setMedicinePrice] = useState(0);
+    const {id} = useParams();
+
+    const [medicineName, setMedicineName] = useState("");
+    const [medicineShortCode, setMedicineShortCode] = useState("");
+    const [medicinePurpose, setMedicinePurpose] = useState("");
+    const [medicineDescription, setMedicineDescription] = useState("");
+    const [medicineQuantity, setMedicineQuantity] = useState(0);
+    const [medicinePrice, setMedicinePrice] = useState(0);
+  
+    useEffect(() => {
+      getProductById(id).then((res) => {
+              // Set the initial state with the provided product data
+      setMedicineName(res.data.medicineName);
+      setMedicineShortCode(res.data.medicineShortCode);
+      setMedicinePurpose(res.data.purpose);
+      setMedicineDescription(res.data.description);
+      setMedicineQuantity(res.data.qty);
+      setMedicinePrice(res.data.averagePricePerUnit);
+      });
+    },[]);
 
   const handleSubmit = (event)=>{
     event.preventDefault();
     var data = {
+        medicineId:id,
       medicineName: medicineName,
       medicineShortCode: medicineShortCode,
       purpose: medicinePurpose,
       description: medicineDescription,
-      qty: medicineQuentity,
+      qty: medicineQuantity,
       averagePricePerUnit: medicinePrice
     };
 
-    addProduct(data);
+    updateProduct(data);
   }
 
   return (
     <div>
-      <h1 className="">Add Medicine To Stock</h1>
+      <h1 className="">Edit Medicine Id : {id}</h1>
       <form className="p-4 rounded-2 shadow-2-strong" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -36,7 +52,7 @@ export default function AddItemToStockComponent() {
             id="name"
             placeholder="Enter medicine name"
             value={medicineName}
-            onChange={(e) => setMedicinename(e.target.value)}
+            onChange={(e) => setMedicineName(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -79,8 +95,8 @@ export default function AddItemToStockComponent() {
             className="form-control mb-3"
             id="quantity"
             placeholder="Enter medicine quentity"
-            value={medicineQuentity}
-            onChange={(e) => setMedicineQuentity(e.target.value)}
+            value={medicineQuantity}
+            onChange={(e) => setMedicineQuantity(e.target.value)}
           />
         </div>
         <div className="form-group">

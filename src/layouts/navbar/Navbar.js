@@ -48,6 +48,11 @@ export default function Navbar() {
                   Stock
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/users">
+                 Users
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="nav-item">

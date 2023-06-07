@@ -15,7 +15,7 @@ export const useAuth = () => {
   const submitLoginData = async (data) => {
     await axios({
       method: "post",
-      withCredentials: true,
+      withCredentials: true, 
       url: API_URL + "Login",
       headers: {
         "Content-Type": "application/json",
@@ -23,20 +23,22 @@ export const useAuth = () => {
       data: data,
     })
       .then(function (response) {
-
-        setCurrentUser(response);
-        navigate("/");
+        if(response.status == 200){
+          setCurrentUser(response);
+          navigate("/");
+        }
       })
       .catch(function (response) {
-        //handle error
+          alert(response.response.data)
         console.log(response);
       });
   };
 
   const setCurrentUser = (response) => {
-
     const token = response.data.token;
+    const userId = response.data.userId;
     localStorage.setItem("token", JSON.stringify(token));
+    localStorage.setItem("userId",userId);
 
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -74,8 +76,9 @@ export const useAuth = () => {
       .then(function (response) {
         if (response.status === 200) {
           alert(
-            "Registration request has been sent to the admin. Please wait for the approval."
+           "registration successful. please log in if your are an admin otherwise wait for the approvel"
           );
+          window.location.href = "/login";
         }
       })
       .catch(function (response) {
@@ -86,6 +89,7 @@ export const useAuth = () => {
 
   const logout = async () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("jwt_access_token");
     window.location.href = "/login";
   };
 
