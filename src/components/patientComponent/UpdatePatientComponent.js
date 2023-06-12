@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import HandleFirebasesubmit from "../../helpers/HandleFirebasesubmit";
 import { getPatientById, updatePatinet } from "../../services/PatientService";
 import { useParams } from "react-router-dom";
-
+ 
 export default function UpdatePatientComponent() {
   const {id} = useParams();
   const [profilePic, setProfilePic] = useState("");

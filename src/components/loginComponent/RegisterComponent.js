@@ -94,7 +94,7 @@ export default function RegisterComponent() {
                   >
                     <option value="">Select the Type</option>
                     <option value="ADM">Admin</option>
-                    <option value="FAMC">Farmasiet</option>
+                    <option value="FAMC">Pharmacist</option>
                     <option value="DOC">Doctor</option>
                   </select>
 

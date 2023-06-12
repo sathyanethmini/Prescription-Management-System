@@ -8,7 +8,7 @@ import { UserContext } from "../contexts/AuthContext";
 
 import RouteGuard from "../middleware/RouteGuard";
 import Patients from "../pages/patientPages/Patients";
-import Prescriptions from "../pages/Prescriptions";
+import Prescriptions from "../pages/prescriptionPages/Prescriptions";
 import Stock from "../pages/stockPages/Stock";
 import Home from "../pages/Home";
 
@@ -22,6 +22,8 @@ import CreatePatient from "../pages/patientPages/CreatePatient";
 import UpdateStockItem from "../pages/stockPages/UpdateStockItem";
 import UpdatePatient from "../pages/patientPages/UpdatePatient";
 import AllUsers from "../pages/userPages/AllUsers";
+import CreatePrescription from "../pages/prescriptionPages/CreatePrescription";
+import ViewPrescription from "../pages/prescriptionPages/ViewPrescription";
 
 export default function AppRoutes() {
 
@@ -45,7 +47,6 @@ export default function AppRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<RouteGuard Component={Home} autherized={userTypes.includes("Doctor")}/>} />
         <Route path="/patients" element={<RouteGuard Component={Patients} autherized={userTypes.includes("Admin")}/>} />
-        <Route path="/prescriptions" element={<RouteGuard Component={Prescriptions} autherized={userTypes.includes("Admin")}/>} />
         <Route path="/stock" element={<RouteGuard Component={Stock}/>} autherized={userTypes.includes("Admin")}/>
         <Route path="/stock/add" element={<RouteGuard Component={AddItemToStock} autherized={userTypes.includes("Admin")}/>} />
         <Route path="/stock/update/:id" element={<RouteGuard Component={UpdateStockItem} autherized={userTypes.includes("Admin")}/>} />
@@ -55,9 +56,14 @@ export default function AppRoutes() {
         <Route path="/users" element={<RouteGuard Component={AllUsers} autherized={userTypes.includes("Admin")}/>} />
 
         {/* Patient Routes */}
-        <Route path="/patients/history" element={<RouteGuard Component={PatientHistory} autherized={userTypes.includes("Admin")}/>} />
+        <Route path="/patients/history/:id" element={<RouteGuard Component={PatientHistory} autherized={userTypes.includes("Admin")}/>} />
         <Route path="/patients/create" element={<RouteGuard Component={CreatePatient} autherized={userTypes.includes("Admin")}/>} />
         <Route path="/patient/update/:id" element={<RouteGuard Component={UpdatePatient} autherized={userTypes.includes("Admin")}/>} />
+
+        {/* Prescription Routes */}
+        <Route path="/prescriptions" element={<RouteGuard Component={Prescriptions} autherized={userTypes.includes("Admin")}/>} />
+        <Route path="/prescription/create-prescriptions/:id" element={<RouteGuard Component={CreatePrescription} autherized={userTypes.includes("Admin")}/>} />
+        <Route path="/prescription/CheckoutPrescription/:id" element={<RouteGuard Component={ViewPrescription} autherized={userTypes.includes("Admin")}/>} />
       </Routes>
     </Router>
   );

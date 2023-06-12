@@ -19,7 +19,7 @@ export default function UserProfileComponent() {
       setDob(res.data.dob);
       setuserType(res.data.userType);
       setCreatedOn(res.data.createdOn);
-      setUserName(res.data.userName);
+      setUserName(res.data.email);
       setProfilePic(res.data.profilePicUrl)
     });
   }, []);
@@ -27,6 +27,7 @@ export default function UserProfileComponent() {
   const handleUpload = (url) => {
     setProfilePic(url);
   };
+
 
   return (
     <div>
@@ -65,7 +66,7 @@ export default function UserProfileComponent() {
                     type="text"
                     className="form-control"
                     placeholder="first name"
-                    value={firstName}
+                    defaultValue={firstName}
                   />
                 </div>
                 <div className="col-md-6">
@@ -73,7 +74,7 @@ export default function UserProfileComponent() {
                   <input
                     type="text"
                     className="form-control"
-                    value={lastName}
+                    defaultValue={lastName}
                     placeholder="surname"
                   />
                 </div>

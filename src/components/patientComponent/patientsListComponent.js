@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; 
 import { useNavigate } from "react-router-dom";
 import { getPatients,deletePatient } from "../../services/PatientService";
 
@@ -6,11 +6,11 @@ export default function PatientsListComponent() {
   const [patients, setPatients] = useState([]);
   const [filteredPatients, setFilteredPatients] = useState([]);
   const [searchNic, setSearchNic] = useState("");
-
+ 
   const Navigate = useNavigate();
 
-  const handleClickViewHistory = () => {
-    Navigate("/patients/history");
+  const handleClickViewHistory = (id) => {
+    Navigate(`/patients/history/${id}`);
   };
   const handleClickCreatePatient = () => {
     Navigate("/patients/create");
@@ -18,6 +18,9 @@ export default function PatientsListComponent() {
 
   const handleUpdatePatient = (id) => {
     Navigate(`/patient/update/${id}`)
+  }
+  const handleAddTodayVisit = (id) => {
+    Navigate(`/prescription/create-prescriptions/${id}`)
   }
 
   useEffect(() => {
@@ -99,21 +102,21 @@ export default function PatientsListComponent() {
                     <button
                       type="button"
                       className="btn btn-success tableButton"
-                      onClick={handleClickViewHistory}
+                      onClick={()=>handleAddTodayVisit(data.patientId)}
                     >
                       Add today visit
                     </button>
                     <button
                       type="button"
                       className="btn btn-primary tableButton"
-                      onClick={handleClickViewHistory}
+                      onClick={()=>handleClickViewHistory(data.patientId)}
                     >
                       View history
                     </button>
                     <button
                       type="button"
                       className="btn btn-warning tableButton"
-                      onClick={()=>handleUpdatePatient(data.patientId)}
+                      onClick={()=>handleUpdatePatient(data.patientId,data.firstName)}
                     >
                       Edit profile
                     </button>

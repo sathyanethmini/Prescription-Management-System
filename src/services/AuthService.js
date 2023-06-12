@@ -35,10 +35,13 @@ export const useAuth = () => {
   };
 
   const setCurrentUser = (response) => {
+    debugger
     const token = response.data.token;
     const userId = response.data.userId;
+    const userType = response.data.userType;
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("userId",userId);
+    localStorage.setItem("userType",userType);
 
     if (localStorage.token) {
       setAuthToken(localStorage.token);
